@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+* {
+  box-sizing: border-box;
+}
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -18,14 +20,36 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+.ql-snow .ql-stroke,
+.ql-snow .ql-picker {
+  stroke: white !important;
+  color: white !important;
+}
+.ql-editor {
+  min-height: 80vh;
+  max-height: 80vh;
+  overflow: auto;
+}
+.ql-editor::-webkit-scrollbar {
+  width: 10px;
 }
 
+/* Track */
+.ql-editor::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+}
+
+/* Handle */
+.ql-editor::-webkit-scrollbar-thumb {
+  background: #3741514d;
+}
+
+/* Handle on hover */
+.ql-editor::-webkit-scrollbar-thumb:hover {
+  background: #3741514d;
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
