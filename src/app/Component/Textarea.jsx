@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic"; // Import dynamic from next/dynamic
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false }); // Dynamically import ReactQuill, disabling server-side rendering
 
 const Textarea = () => {
   const [value, setValue] = useState("");
