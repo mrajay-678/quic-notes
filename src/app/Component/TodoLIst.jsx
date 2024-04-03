@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 const TodoLIst = () => {
@@ -44,16 +46,7 @@ const TodoLIst = () => {
         </div>
       </form>
       <ul className="px-5">
-        <li className="w-full px-5 py-2 my-2 duration-500 ease-out hover:bg-gray-500 rounded">AJAY</li>
-        <li className="w-full px-5 py-2 my-2 duration-500 ease-out hover:bg-gray-500 rounded">AJAY</li>
-        <li className="w-full px-5 py-2 my-2 duration-500 ease-out hover:bg-gray-500 rounded">AJAY</li>
-        <li className="w-full px-5 py-2 my-2 duration-500 ease-out hover:bg-gray-500 rounded">AJAY</li>
-        <li className="w-full px-5 py-2 my-2 duration-500 ease-out hover:bg-gray-500 rounded">AJAY</li>
-        <li className="w-full px-5 py-2 my-2 duration-500 ease-out hover:bg-gray-500 rounded">AJAY</li>
-        <li className="w-full px-5 py-2 my-2 duration-500 ease-out hover:bg-gray-500 rounded">AJAY</li>
-        <li className="w-full px-5 py-2 my-2 duration-500 ease-out hover:bg-gray-500 rounded">AJAY</li>
-        <li className="w-full px-5 py-2 my-2 duration-500 ease-out hover:bg-gray-500 rounded">AJAY</li>
-        <li className="w-full px-5 py-2 my-2 duration-500 ease-out hover:bg-gray-500 rounded">AJAY</li>
+        
       </ul>
     </div>
   );

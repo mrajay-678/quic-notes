@@ -1,52 +1,61 @@
-"use client";
+"use client"
 
-import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic"; // Import dynamic from next/dynamic
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false }); // Dynamically import ReactQuill, disabling server-side rendering
+import React, { useEffect, useState } from "react"
+import ReactQuill from "react-quill"
+import "react-quill/dist/quill.snow.css"
+import Toster from "./Toster"
 
-const Textarea = () => {
-  const [value, setValue] = useState("");
-  const [todo, setTodo] = useState([""]);
+const Textarea = ({setSaveTodo}) => {
+	const [value, setValue] = useState("")
+	const [todo, setTodo] = useState([])
+	const [toster, setToster] = useState(false)
+	const [todoName, settodoName] = useState("")
 
-  useEffect(() => {
-    const currentTodo = localStorage.getItem("currentTodo");
-    if (currentTodo) {
-      setValue(currentTodo);
-    }
-  }, []);
-  useEffect(() => {
-    let timeoutId = setTimeout(() => {
-      localStorage.setItem("currentTodo", value);
-    }, 4000);
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [value]);
-  let formHandel = e => {
-    e.preventDefault();
-    setTodo(...todo, value);
-    console.log(todo);
-    localStorage.setItem("SavedTodo", todo);
+	useEffect(() => {
+		const currentTodo = localStorage.getItem("currentTodo")
+		const currentTodoName = localStorage.getItem("currentTodoName")
+		if (currentTodo || currentTodoName ) {
+			setValue(currentTodo)
+			settodoName(currentTodoName)
+		}
+		const SavedTodo = JSON.parse(localStorage.getItem("SavedTodo"))
+		SavedTodo && setTodo([...SavedTodo])
+		localStorage.setItem("SavedTodo", JSON.stringify(SavedTodol,m l. ))
+	}, [])
+	let formHandel = (e) => {
+		e.preventDefault()
+		setTodo([...todo,{ name: todoName , todo:value }] )
+		localStorage.setItem("SavedTodo", JSON.stringify(todo))
+		setSaveTodo(todo)
+		console.log(todo)
+	}
+	useEffect(() => {
+		let timeoutId = setTimeout(() => {
+			localStorage.setItem("currentTodo", value)
+			localStorage.setItem("currentTodoName", todoName)
+			setToster(true)
+		}, 4000)
+		return () => {
+			setToster(false)
+			clearTimeout(timeoutId)
+		}
+	}, [value , todoName])
 
-    console.log(e);
-  };
-  console.log(value);
-  return (
-    <form onSubmit={formHandel}>
-      <ReactQuill
-        theme="snow"
-        value={value}
-        onChange={setValue}
-        className="bg-gray-700 text-blue-50 my-5 mr-5"
-      />
-      <button
-        type="submit"
-        className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
-      >
-        Submit
-      </button>
-    </form>
-  );
-};
+	return (
+		<form onSubmit={formHandel}>
+			<div className={`toster-outer transition-all duration-[2s] ${toster && "opacity-0"}`}>{toster && <Toster />}</div>
+			<div className="my-6 mr-5">
+				<label htmlFor="large-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+					NAME TASK
+				</label>
+				<input value={todoName} onInput={(e) => settodoName(e.target.value)} type="text" id="large-input" className="block w-full  p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:" />
+			</div>
+			<ReactQuill theme="snow" value={value} onChange={setValue} className="bg-gray-700 text-blue-50 my-5 mr-5 rounded" />
+			<button type="submit" className=" border focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2  ">
+				Submit
+			</button>
+		</form>
+	)
+}
 
-export default Textarea;
+export default Textarea
