@@ -1,8 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const TodoLIst = () => {
+const TodoLIst = ({ todo }) => {
+  const [todolist, setTodolist] = useState([]);
+  useEffect(() => {
+    setTodolist(todo);
+  }, [todo]);
   return (
     <div>
       <form className="max-w-md mx-auto">
@@ -46,7 +50,17 @@ const TodoLIst = () => {
         </div>
       </form>
       <ul className="px-5">
-        
+        {todolist.map((value, index) => {
+          console.log(value, index);
+          return (
+            <li
+              key={index}
+              className="w-full px-5 py-2 my-2 duration-500 ease-out hover:bg-gray-500 rounded"
+            >
+              {value[name]}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
