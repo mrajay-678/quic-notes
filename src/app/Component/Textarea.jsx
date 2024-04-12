@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-const ReactQuill = dynamic(() => import("lottie-react"), { ssr: false });
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 import Toster from "./Toster";
+import dynamic from "next/dynamic";
 
 const Textarea = ({ setSaveTodo }) => {
   const [value, setValue] = useState("");
